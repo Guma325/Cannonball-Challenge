@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvyl8chc1gv41"]
+
+[ext_resource type="PackedScene" uid="uid://c1o0skyoqbhug" path="res://car.tscn" id="1_5x732"]
+[ext_resource type="Texture2D" uid="uid://voqfrcyueut3" path="res://Rua_Dupla.png" id="2_oij55"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fa11y"]
+texture = ExtResource("2_oij55")
+0:0/size_in_atlas = Vector2i(25, 18)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_mnts2"]
+sources/0 = SubResource("TileSetAtlasSource_fa11y")
+
+[node name="World" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_mnts2")
+format = 2
+layer_0/tile_data = PackedInt32Array(786431, 0, 0, -393217, 0, 0, -1572865, 0, 0, -2752513, 0, 0, -3932161, 0, 0, -5111809, 0, 0, -6291457, 0, 0)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_5x732")]
+rotation = -1.5708
+scale = Vector2(1.2, 1.2)
