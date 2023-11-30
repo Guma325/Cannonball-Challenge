@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var wheel_base = 70
 var steering_angle = 15
-var engine_power = 900
+var engine_power = 1000
 var friction = -55
 var drag = -0.06
 var braking = -450
@@ -21,7 +21,14 @@ func _physics_process(delta):
 	calculate_steering(delta)
 	velocity += acceleration * delta
 	move_and_slide()
+
+func set_speed_powerup(speed: int):
+	engine_power = speed
 	
+func guardrail_colided():
+	print("Car exploded")
+	queue_free()
+
 func apply_friction(delta):
 	if acceleration == Vector2.ZERO and velocity.length() < 50:
 		velocity = Vector2.ZERO
@@ -51,5 +58,5 @@ func calculate_steering(delta):
 		velocity = lerp(velocity, new_heading * velocity.length(), traction * delta)
 	if d < 0:
 		velocity = -new_heading * min(velocity.length(), max_speed_reverse)
-#	velocity = new_heading * velocity.length()
+	velocity = new_heading * velocity.length()
 	rotation = new_heading.angle()

@@ -20,3 +20,5 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_yfjtt")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Speed_Powerup_Timer" type="Timer" parent="."]
