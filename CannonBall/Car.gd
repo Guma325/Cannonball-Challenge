@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var animations = $AnimationPlayer
 @export var game_over_scene = preload("res://Game_Over/game_over.tscn") as PackedScene
 @export var finish_screen_scene = preload("res://Finish_Line_Screen/finish_screen.tscn") as PackedScene
-
+#https://kidscancode.org/godot_recipes/4.x/2d/car_steering/index.html
 
 var wheel_base = 70
 var steering_angle = 15
