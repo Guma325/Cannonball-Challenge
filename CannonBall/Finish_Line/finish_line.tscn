@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://2pc7cadp8cdm"]
+
+[ext_resource type="Script" path="res://Finish_Line/Finish_Line.gd" id="1_a80lr"]
+[ext_resource type="Texture2D" uid="uid://ccbk56jc7besj" path="res://Finish_Line/Linha_de_chegada.png" id="2_r46qj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w4w5t"]
+size = Vector2(986.5, 157.5)
+
+[node name="Finish_Line" type="Area2D"]
+script = ExtResource("1_a80lr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w4w5t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.147017, 0.503592)
+texture = ExtResource("2_r46qj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

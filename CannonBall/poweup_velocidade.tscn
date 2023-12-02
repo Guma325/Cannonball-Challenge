@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ehuedvo03lco"]
+
+[ext_resource type="Script" path="res://poweup_velocidade.gd" id="1_5r14y"]
+[ext_resource type="Texture2D" uid="uid://b6oaojsyvlw3h" path="res://Powerup_Velocidade.png" id="1_rvo4x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c3r0s"]
+
+[node name="Poweup_Velocidade" type="Area2D"]
+script = ExtResource("1_5r14y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_c3r0s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(0.0272217, 0.0272217)
+texture = ExtResource("1_rvo4x")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

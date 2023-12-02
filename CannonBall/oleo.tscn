@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cycsr61bhbj3e"]
+
+[ext_resource type="Script" path="res://oleo.gd" id="1_jaioj"]
+[ext_resource type="Texture2D" uid="uid://bxc500ishebbo" path="res://Tiles/oleo.png" id="2_fcamp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q12tx"]
+radius = 23.0
+
+[node name="oleo" type="Area2D"]
+script = ExtResource("1_jaioj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_fcamp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 0)
+shape = SubResource("CircleShape2D_q12tx")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

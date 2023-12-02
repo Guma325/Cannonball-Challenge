@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dq722i5mhuufu"]
+
+[ext_resource type="Script" path="res://policia.gd" id="1_8n8g7"]
+[ext_resource type="Texture2D" uid="uid://n57t3cu4j000" path="res://CarroPolica.png" id="2_h1ltl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yfjtt"]
+radius = 27.0
+height = 74.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_abk2g"]
+radius = 27.0
+height = 76.0
+
+[node name="Policia" type="CharacterBody2D"]
+script = ExtResource("1_8n8g7")
+
+[node name="Carro" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("2_h1ltl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yfjtt")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_abk2g")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered" flags=18]

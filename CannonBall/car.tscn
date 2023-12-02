@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://c1o0skyoqbhug"]
+
+[ext_resource type="Script" path="res://Car.gd" id="1_xklll"]
+[ext_resource type="Texture2D" uid="uid://dbd5h7p65tev" path="res://Tiles/CarroAnimation.png" id="2_2aphi"]
+
+[sub_resource type="Animation" id="Animation_qshxs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2xqcq"]
+resource_name = "Spin"
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(2, 0), Vector2i(1, 0), Vector2i(3, 0), Vector2i(0, 0), Vector2i(1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mhptn"]
+_data = {
+"RESET": SubResource("Animation_qshxs"),
+"Spin": SubResource("Animation_2xqcq")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yfjtt"]
+radius = 27.0
+height = 74.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_abk2g"]
+radius = 27.0
+height = 76.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_xklll")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Carro")
+libraries = {
+"": SubResource("AnimationLibrary_mhptn")
+}
+
+[node name="Carro" type="Sprite2D" parent="."]
+rotation = 4.71239
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("2_2aphi")
+hframes = 4
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yfjtt")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.7, 0.7)
+
+[node name="Speed_Powerup_Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32768
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_abk2g")
+
+[connection signal="timeout" from="Speed_Powerup_Timer" to="." method="_on_speed_powerup_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
